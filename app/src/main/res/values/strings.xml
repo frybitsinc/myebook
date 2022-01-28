@@ -3,4 +3,6 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="open_api_client_id">4PlWWzVp448z2YrYDa3S</string>
+    <string name="open_api_client_secret">GR0rkuQsTQ</string>
 </resources>
