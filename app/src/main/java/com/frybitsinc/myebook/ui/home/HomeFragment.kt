@@ -1,21 +1,34 @@
 package com.frybitsinc.myebook.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.frybitsinc.myebook.R
+import com.frybitsinc.myebook.api.BookFetcher
+
+private const val TAG = "HomeFragment"
 
 class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var bookRecyclerView: RecyclerView
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val bookLiveData: LiveData<String> = BookFetcher().fetchBooks()
+        bookLiveData.observe(
+            this,
+            Observer { res -> Log.d(TAG, "response = $res")}
+        )
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater,
