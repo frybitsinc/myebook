@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.frybitsinc.myebook.R
 import com.frybitsinc.myebook.api.BookFetcher
+import com.frybitsinc.myebook.model.BookItem
 
 private const val TAG = "HomeFragment"
 
@@ -23,7 +24,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val bookLiveData: LiveData<String> = BookFetcher().fetchBooks()
+        val bookLiveData: LiveData<List<BookItem>> = BookFetcher().fetchBooks()
         bookLiveData.observe(
             this,
             Observer { res -> Log.d(TAG, "response = $res")}

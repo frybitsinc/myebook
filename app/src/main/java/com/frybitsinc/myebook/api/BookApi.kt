@@ -12,5 +12,5 @@ interface BookApi {
     @GET("/v1/search/book.json?"+
             "sort=date"+
             "&query=안드로이드")
-    fun fetchBooks(): Call<String>
+    fun fetchBooks(): Call<BookResponse>
 }
