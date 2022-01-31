@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.frybitsinc.myebook.R
 import com.frybitsinc.myebook.api.BookFetcher
 import com.frybitsinc.myebook.model.BookItem
+import com.frybitsinc.myebook.ui.BaseRecyclerAdapter
 
 private const val TAG = "HomeFragment"
 
@@ -27,7 +28,9 @@ class HomeFragment : Fragment() {
         val bookLiveData: LiveData<List<BookItem>> = BookFetcher().fetchBooks()
         bookLiveData.observe(
             this,
-            Observer { res -> Log.d(TAG, "response = $res")}
+            Observer {
+                setAdapter(it)
+            }
         )
     }
 
@@ -41,5 +44,11 @@ class HomeFragment : Fragment() {
         bookRecyclerView = view.findViewById(R.id.book_recycler_view)
         bookRecyclerView.layoutManager = LinearLayoutManager(context)
         return view
+    }
+
+    private fun setAdapter(bookList:List<BookItem>){
+        val mAdapter = context?.let { BaseRecyclerAdapter(bookList, it) }
+        bookRecyclerView.adapter = mAdapter
+        bookRecyclerView.setHasFixedSize(false)
     }
 }
